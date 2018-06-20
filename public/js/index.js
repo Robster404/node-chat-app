@@ -7,7 +7,6 @@ socket.on('beforeJoin', function(rooms) {
 		rooms.forEach(function(room) {
 			sel.append(jQuery('<option></option>').val(room).text(room));
 		});
-	} else {
-		jQuery('#activeRooms').hide();
+		jQuery('#activeRooms').show();
 	}
 });
