@@ -23,8 +23,6 @@ socket.on('connect', function() {
 		if (err) {
 			alert(err);
 			window.location.href = '/';
-		} else {
-			console.log('No error');
 		}
 	});
 });
@@ -34,6 +32,11 @@ socket.on('disconnect', function() {
 });
 
 socket.on('updateUserList', function(users) {
+	var params = jQuery.deparam(window.location.search);	
+	
+	var room = jQuery('<ul><li>'+((params.room) ? params.room : params.rooms)+'<a href="/" class="closeLink">X</a></li></ul>');
+	jQuery('#chatRoom').html(room);
+	
 	var ol = jQuery('<ol></ol>');
 	
 	users.forEach(function(user) {

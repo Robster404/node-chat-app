@@ -193,3 +193,9 @@ button:disabled {
     margin-right: 0px;
   }
 }
+.closeLink {
+	float: right;
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
+}

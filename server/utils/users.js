@@ -1,9 +1,3 @@
-[{
-	id: '/sdgdfgRD$%&%^I2345',
-	name: 'Rob',
-	room: 'Th Office Fans'
-}]
-
 // add User(id, name, roomname)
 // removeUser(id)
 // getUser(id)
@@ -14,7 +8,11 @@ class Users {
 		this.users = [];
 	}
 	addUser(id, name, room) {
-		var user = {id, name, room};
+		var user = {
+			id, 
+			name: name,
+			room: room
+		};
 		this.users.push(user);
 		return user;
 	}
@@ -30,11 +28,21 @@ class Users {
 	getUser(id) {
 		return this.users.filter((user) => user.id === id)[0];
 	}
+	checkUser(name, room) {
+		return this.users.filter((user) => (user.name.toLowerCase() === name.toLowerCase() && user.room.toLowerCase() === room.toLowerCase()))[0];
+	}
 	getUserList(room) {
 		var users = this.users.filter((user) => user.room === room);
 		var namesArray = users.map((user) => user.name);
 		
 		return namesArray;
+	}
+	getRoomList() {
+		var rooms = [];
+		this.users.forEach(function(user) {
+			rooms.push(user.room);
+		});
+		return rooms;
 	}
 }
 

@@ -19,11 +19,21 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
 	console.log('New user connected');
 	
-	socket.on('join', (params, callback) => {
+	socket.emit('beforeJoin', users.getRoomList());
+	
+	socket.on('join', (params, callback) => {		
+		params.room = (params.room) ? params.room : params.rooms;
+		
 		if (!isRealString(params.name) || !isRealString(params.room)) {
 			return callback('Name and room name are required');
+		} else {
+			var userName = users.checkUser(params.name, params.room);
+			
+			if (userName) {
+				return callback('Name already in use in this room');
+			}
 		}
-		
+	
 		socket.join(params.room);
 		users.removeUser(socket.id); 
 		users.addUser(socket.id, params.name, params.room);
