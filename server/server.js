@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
 	
 	socket.emit('beforeJoin', users.getRoomList());
 	
-	socket.on('join', (params, callback) => {		
+	socket.on('join', (params, callback) => {
 		params.room = (params.room) ? params.room : params.rooms;
 		
 		if (!isRealString(params.name) || !isRealString(params.room)) {
